@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人作品集</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #0a0e27;
+            color: #e0e0e0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00d4ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #a0a0a0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #00d4ff;
+        }
+        
+        .hero {
+            padding-top: 120px;
+            padding-bottom: 60px;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(0, 212, 255, 0.05) 0%, rgba(10, 14, 39, 0) 100%);
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00d4ff, #7c3aed, #ff006e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: #888;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: #fff;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .project-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .project-card:hover {
+            border-color: rgba(0, 212, 255, 0.3);
+            transform: translateY(-5px);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(124, 58, 237, 0.05) 100%);
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #1a3a52 0%, #2d1b69 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+        
+        .project-desc {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.1);
+            color: #00d4ff;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            transition: all 0.2s;
+        }
+        
+        .tag:hover {
+            background: rgba(0, 212, 255, 0.2);
+        }
+        
+        .tag.design {
+            color: #ff006e;
+            border-color: rgba(255, 0, 110, 0.3);
+        }
+        
+        .tag.design:hover {
+            background: rgba(255, 0, 110, 0.1);
+        }
+        
+        .tag.ai {
+            color: #7c3aed;
+            border-color: rgba(124, 58, 237, 0.3);
+        }
+        
+        .tag.ai:hover {
+            background: rgba(124, 58, 237, 0.1);
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .skill-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            border-color: rgba(0, 212, 255, 0.3);
+            background: rgba(0, 212, 255, 0.05);
+        }
+        
+        .skill-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #00d4ff;
+        }
+        
+        .skill-item ul {
+            list-style: none;
+        }
+        
+        .skill-item li {
+            padding: 0.5rem 0;
+            color: #888;
+            font-size: 0.95rem;
+        }
+        
+        .skill-item li:before {
+            content: "→ ";
+            color: #7c3aed;
+            margin-right: 0.5rem;
+        }
+        
+        .about {
+            max-width: 800px;
+            line-height: 1.8;
+        }
+        
+        .about p {
+            margin-bottom: 1rem;
+            color: #aaa;
+        }
+        
+        .footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem 0;
+            text-align: center;
+            color: #666;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00d4ff;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: rgba(0, 212, 255, 0.6);
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-content">
+            <div class="logo">YOUR NAME</div>
+            <ul class="nav-links">
+                <li><a href="#about">关于</a></li>
+                <li><a href="#projects">项目</a></li>
+                <li><a href="#skills">技能</a></li>
+                <li><a href="#contact">联系</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1>创意开发者</h1>
+            <p>设计与技术的完美融合，打造卓越的数字体验</p>
+        </div>
+    </section>
+
+    <section id="about" class="section container">
+        <h2 class="section-title">关于我</h2>
+        <div class="about">
+            <p>我是一名全栈开发者，热衷于将创意想法转化为现实。拥有多年的设计和开发经验，专注于创建美观、高效且用户友好的产品。</p>
+            <p>我相信好的设计不仅要美观，更要有功能性和可用性。每个项目都是一个机会去学习新技术、探索新思路。</p>
+        </div>
+    </section>
+
+    <section id="projects" class="section container">
+        <h2 class="section-title">精选项目</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image">🎨</div>
+                <div class="project-content">
+                    <h3 class="project-title">设计系统</h3>
+                    <p class="project-desc">构建完整的企业级设计系统，提升产品一致性和开发效率</p>
+                    <div class="tags">
+                        <span class="tag design">Design</span>
+                        <span class="tag">Frontend</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">🤖</div>
+                <div class="project-content">
+                    <h3 class="project-title">AI 助手</h3>
+                    <p class="project-desc">基于大语言模型的智能对话系统，提供智能客服解决方案</p>
+                    <div class="tags">
+                        <span class="tag ai">AI</span>
+                        <span class="tag">Backend</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">📱</div>
+                <div class="project-content">
+                    <h3 class="project-title">移动应用</h3>
+                    <p class="project-desc">跨平台移动应用开发，提供流畅的用户体验</p>
+                    <div class="tags">
+                        <span class="tag">Mobile</span>
+                        <span class="tag design">UX</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">🌐</div>
+                <div class="project-content">
+                    <h3 class="project-title">电商平台</h3>
+                    <p class="project-desc">全功能电商系统，包括支付、库存和订单管理</p>
+                    <div class="tags">
+                        <span class="tag">Fullstack</span>
+                        <span class="tag ai">Data</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">🎬</div>
+                <div class="project-content">
+                    <h3 class="project-title">内容创作平台</h3>
+                    <p class="project-desc">创意工作者的一站式创作平台，支持协作和发布</p>
+                    <div class="tags">
+                        <span class="tag design">Creative</span>
+                        <span class="tag">Social</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">📊</div>
+                <div class="project-content">
+                    <h3 class="project-title">数据可视化</h3>
+                    <p class="project-desc">企业级数据分析仪表板，实时展示关键指标</p>
+                    <div class="tags">
+                        <span class="tag ai">Analytics</span>
+                        <span class="tag">Visualization</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section container">
+        <h2 class="section-title">核心技能</h2>
+        <div class="skills-grid">
+            <div class="skill-item">
+                <h3>前端开发</h3>
+                <ul>
+                    <li>React / Vue.js</li>
+                    <li>TypeScript</li>
+                    <li>Tailwind CSS</li>
+                    <li>Web 性能优化</li>
+                </ul>
+            </div>
+            <div class="skill-item">
+                <h3>后端开发</h3>
+                <ul>
+                    <li>Node.js</li>
+                    <li>Python</li>
+                    <li>数据库设计</li>
+                    <li>API 开发</li>
+                </ul>
+            </div>
+            <div class="skill-item">
+                <h3>设计与创意</h3>
+                <ul>
+                    <li>UI/UX 设计</li>
+                    <li>品牌设计</li>
+                    <li>原型制作</li>
+                    <li>用户研究</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section container">
+        <h2 class="section-title">联系我</h2>
+        <div class="social-links">
+            <a href="mailto:your.email@example.com" title="Email">✉️</a>
+            <a href="#" title="GitHub">⚙️</a>
+            <a href="#" title="LinkedIn">💼</a>
+            <a href="#" title="Twitter">𝕏</a>
+        </div>
+        <p style="color: #666;">欢迎通过邮件或社交媒体与我联系，期待与你的合作！</p>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 Your Name. All rights reserved.</p>
+        </div>
+    </footer>
+<script>window.parent.postMessage({ action: "ready" }, "*"); 
+ 
+window.console = new Proxy(console, {
+  get(target, prop) {
+    if (['log', 'warn', 'error'].includes(prop)) {
+      return new Proxy(target[prop], {
+        apply(fn, thisArg, args) {
+          fn.apply(thisArg, args);
+          window.parent.postMessage({ action: 'console', 
+            type: prop, 
+            args: args.map((arg) => {
+              try {
+                return JSON.stringify(arg).replace(/^["']|["']$/g, '');
+              } catch (e) {
+                return arg;
+              }
+            }) 
+          }, '*');
+        }
+      });
+    }
+    return target[prop];
+  }
+});
+</script></body>
+</html>
